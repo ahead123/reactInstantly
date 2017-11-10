@@ -1,11 +1,12 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Privacy from './Privacy';
-import NavigationLink from './NavigationLink'
-import { navData } from './NavLinkData'
+import Dashboard from './Dashboard';
+import NavigationLink from './NavigationLink';
+import { navData } from './NavLinkData';
 
 class Routes extends Component {
 
@@ -27,8 +28,9 @@ class Routes extends Component {
 
 		    <div className="container col-md-12">
 		    	<Route exact path="/" component={Home} />
-		      <Route path="/users" component={Home} />
-		      <Route path="/privacy-policy" component={Privacy} />
+		      <Route path="/home" component={Home} />
+		      <Route path="/privacy" component={Privacy} />
+		      <Route path="/dashboard" component={Dashboard} />
 		    </div>
 
 		  </div>

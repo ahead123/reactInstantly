@@ -1,6 +1,7 @@
 const navData = [
-	{ path: '/users', text: 'Instagram' },
-	{ path: '/privacy-policy', text: 'Privacy' }
+	{ path: '/home', text: 'Instagram' },
+	{ path: '/privacy', text: 'Privacy' },
+	{ path: '/dashboard', text: 'Dashboard' }
 ]
 
 export { navData }
