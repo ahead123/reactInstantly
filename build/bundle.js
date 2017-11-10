@@ -17591,7 +17591,7 @@ __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
-var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=http://localhost:3000/dashboard&response_type=token';
+var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/dashboard&response_type=token';
 
 /***/ }),
 /* 263 */
