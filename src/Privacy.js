@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
-export default class App extends Component {
+export default class Privacy extends Component {
   constructor() {
     super();
     this.state = {
-      value: 'My Name Is Nick'
+      value: 'Privacy Page'
     };
   }
 
 	render() {
+    const { value } = this.state
 		return (
 			<div>
-        { this.state.value }
+        { value }
 			</div>
 		);
 	}
