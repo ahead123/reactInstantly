@@ -16452,8 +16452,6 @@ var Home = function (_Component) {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         }
-      }).then(function (response) {
-        return console.log(response);
       }).catch(function (error) {
         return console.log(error);
       });
