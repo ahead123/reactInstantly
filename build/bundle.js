@@ -16447,7 +16447,12 @@ var Home = function (_Component) {
 
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
-      fetch(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* API_URL */]).then(function (response) {
+      fetch(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* API_URL */], {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(function (response) {
         return console.log(response);
       }).catch(function (error) {
         return console.log(error);

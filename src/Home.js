@@ -13,9 +13,14 @@ export default class Home extends Component {
 
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
-    fetch(API_URL)
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+    fetch(API_URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
   }
 
 	render() {
