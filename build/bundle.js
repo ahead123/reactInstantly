@@ -16449,7 +16449,7 @@ var Home = function (_Component) {
         url: __WEBPACK_IMPORTED_MODULE_2__constants__["a" /* API_URL */],
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+          'Access-Control-Allow-Headers': 'Content-Type'
         }
       }).then(function (response) {
         return console.log('response', response);
