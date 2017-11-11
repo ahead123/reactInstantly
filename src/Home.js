@@ -13,11 +13,11 @@ export default class Home extends Component {
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
     axios({
-      method: 'get',
+      method: 'GET',
       url: API_URL,
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type'
+        'Access-Control-Allow-Headers': 'origin, content-type, accept'
       }
     })
     .then(response => console.log('response',response))
