@@ -16444,10 +16444,16 @@ var Home = function (_Component) {
 
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
-      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(__WEBPACK_IMPORTED_MODULE_2__constants__["a" /* API_URL */]).then(function (response) {
-        return console.log(response);
+      __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+        method: 'get',
+        url: __WEBPACK_IMPORTED_MODULE_2__constants__["a" /* API_URL */],
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(function (response) {
+        return console.log('response', response);
       }).catch(function (error) {
-        return console.log(error);
+        return console.log('error', error);
       });
     };
 
@@ -17591,7 +17597,7 @@ __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
-var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://cors-anywhere.herokuapp.com/https://sleepy-brushlands-39585.herokuapp.com/dashboard&response_type=token';
+var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/dashboard&response_type=token';
 
 /***/ }),
 /* 263 */
