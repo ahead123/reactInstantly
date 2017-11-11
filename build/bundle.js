@@ -16449,7 +16449,9 @@ var Home = function (_Component) {
         url: __WEBPACK_IMPORTED_MODULE_2__constants__["a" /* API_URL */],
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'origin, content-type, accept'
+          'Access-Control-Allow-Headers': {
+            'Content-Type': 'application/json'
+          }
         }
       }).then(function (response) {
         return console.log('response', response);
