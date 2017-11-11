@@ -16,7 +16,8 @@ export default class Home extends Component {
       method: 'get',
       url: API_URL,
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
       }
     })
     .then(response => console.log('response',response))
