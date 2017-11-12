@@ -38002,9 +38002,12 @@ var ProfileImage = function ProfileImage(_ref) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'badge badge-pill badge-success' },
-              'hashTag#'
-            ),
-            ' ',
+              'Post'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'small',
+            null,
             caption
           )
         )
@@ -38025,7 +38028,7 @@ exports = module.exports = __webpack_require__(579)(undefined);
 
 
 // module
-exports.push([module.i, ".card-profile {\n  max-width: 340px;\n  margin: 50px auto;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 1em 1em 2em rgba(0,0,0,.2);\n}\n\n.card-img-top {\n  border-radius: 0;\n}\n\n.card-img-profile {\n  max-width: 100%;\n  border-radius: 50%;\n  margin-top: -95px;\n  margin-bottom: 35px;\n}\n\n.card-title {\n  margin-bottom: 50px;\n}\n\nsmall {\n  display: block;\n  font-size: .6em;\n  margin-top: .2em;\n}", ""]);
+exports.push([module.i, ".card-profile {\n  max-width: 340px;\n  margin: 50px auto;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 1em 1em 2em rgba(0,0,0,.2);\n}\n\n.card-img-top {\n  border-radius: 0;\n}\n\n.card-img-profile {\n  max-width: 100%;\n  border-radius: 50%;\n  margin-top: -95px;\n  margin-bottom: 35px;\n}\n\n.card-title {\n  margin-bottom: 50px;\n  padding: 5px;\n}\n\nsmall {\n  display: block;\n  font-size: .6em;\n  margin-top: .2em;\n}", ""]);
 
 // exports
 

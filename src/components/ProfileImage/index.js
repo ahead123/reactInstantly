@@ -15,7 +15,8 @@ const ProfileImage = ({ thumbnailURL, width, height, count, likes, caption }) =>
   				<h4 className="card-title">
   					<small><span className="badge badge-pill badge-primary">Comments {count}</span></small>
   					<small><span className="badge badge-pill badge-info">Likes {likes}</span></small>
-  					<small><span className="badge badge-pill badge-success">hashTag#</span> { caption }</small>
+  					<small><span className="badge badge-pill badge-success">Post</span></small>
+  					<small>{ caption }</small>
   				</h4>
   			</div>
   		</div>  
