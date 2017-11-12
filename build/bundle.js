@@ -16453,8 +16453,12 @@ var Home = function (_Component) {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET'
         }
+      }).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        return console.log(json.data);
       }).catch(function (error) {
-        return console.log(error);
+        return console.log("error ", error);
       });
     };
 
