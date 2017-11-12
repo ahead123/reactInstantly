@@ -60,11 +60,11 @@ export default class App extends Component {
 
   loadProfile = () => {
     if(this.state.data.id){
-      const { data: { full_name, profile_picture, counts } } = this.state
+      const { data: { full_name, profile_picture, counts, username } } = this.state
       return (
-        <UserProfile 
+        <UserProfile
+          userName={username} 
           text={full_name} 
-          title="Front end developer" 
           profile_picture={profile_picture}
           followers={counts.followed_by}
           following={counts.follows}

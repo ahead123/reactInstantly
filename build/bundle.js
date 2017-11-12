@@ -37443,8 +37443,8 @@ function toComment(sourceMap) {
 
 
 var UserProfile = function UserProfile(_ref) {
-	var text = _ref.text,
-	    title = _ref.title,
+	var userName = _ref.userName,
+	    text = _ref.text,
 	    profile_picture = _ref.profile_picture,
 	    followers = _ref.followers,
 	    following = _ref.following,
@@ -37455,7 +37455,7 @@ var UserProfile = function UserProfile(_ref) {
 		{ className: 'card card-profile text-center' },
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
 			className: 'card-img-top',
-			src: 'https://goo.gl/uoM8jp'
+			src: 'https://picsum.photos/340/160/?random'
 		}),
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			'div',
@@ -37471,14 +37471,18 @@ var UserProfile = function UserProfile(_ref) {
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'small',
 					null,
-					title
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'span',
+						{ className: 'badge badge-pill badge-warning' },
+						userName
+					)
 				),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'small',
 					null,
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'span',
-						{ className: 'badge badge-primary' },
+						{ className: 'badge badge-pill badge-primary' },
 						'Followers ',
 						followers
 					)
@@ -37488,7 +37492,7 @@ var UserProfile = function UserProfile(_ref) {
 					null,
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'span',
-						{ className: 'badge badge-info' },
+						{ className: 'badge badge-pill badge-info' },
 						'Following ',
 						following
 					)
@@ -37498,7 +37502,7 @@ var UserProfile = function UserProfile(_ref) {
 					null,
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'span',
-						{ className: 'badge badge-success' },
+						{ className: 'badge badge-pill badge-success' },
 						'Posts ',
 						posts
 					)
@@ -37739,11 +37743,12 @@ var App = function (_Component) {
         var _this$state$data = _this.state.data,
             full_name = _this$state$data.full_name,
             profile_picture = _this$state$data.profile_picture,
-            counts = _this$state$data.counts;
+            counts = _this$state$data.counts,
+            username = _this$state$data.username;
 
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__UserProfile__["a" /* default */], {
+          userName: username,
           text: full_name,
-          title: 'Front end developer',
           profile_picture: profile_picture,
           followers: counts.followed_by,
           following: counts.follows,
@@ -37976,7 +37981,7 @@ var ProfileImage = function ProfileImage(_ref) {
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
-              { className: 'badge badge-primary' },
+              { className: 'badge badge-pill badge-primary' },
               'Comments ',
               count
             )
@@ -37986,7 +37991,7 @@ var ProfileImage = function ProfileImage(_ref) {
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
-              { className: 'badge badge-info' },
+              { className: 'badge badge-pill badge-info' },
               'Likes ',
               likes
             )
@@ -37996,7 +38001,7 @@ var ProfileImage = function ProfileImage(_ref) {
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
-              { className: 'badge badge-success' },
+              { className: 'badge badge-pill badge-success' },
               'hashTag#'
             ),
             ' ',
