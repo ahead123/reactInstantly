@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import jsonp from 'jsonp';
 import 'whatwg-fetch';
 import { 
   API_URL, 
   TEST_API_URL,
-  TEST_API_URL_WITH_PUBLIC_CONTENT,
-  API_CALL_FOR_USER_PROFILE,
-  API_URL_WITH_PUBLIC_CONTENT 
+  API_CALL_FOR_USER_PROFILE
 } from './constants';
+import UserProfile from './UserProfile'
 
+const SCOPES = '&scope=public_content+follower_list+comments+relationships+likes';
 
-export default class Home extends Component {
+export default class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -18,7 +19,7 @@ export default class Home extends Component {
       access_token: '',
       loading: false,
       authorized: false,
-      userData: []
+      data: []
     };
   }
 
@@ -28,16 +29,14 @@ export default class Home extends Component {
       console.log('prevProps',prevProps)
       console.log('prevState',prevState)
       console.log('state inside update', this.state)
-      axios(API_CALL_FOR_USER_PROFILE + access_token, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
+      jsonp(API_CALL_FOR_USER_PROFILE + access_token, null, (error, data) => {
+        if(error){
+          console.log('error', error)
+        }else{
+          console.log('data', data)
+          this.setState({ data: data.data })
         }
       })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => console.log(error))
     }
   }
 
@@ -52,15 +51,23 @@ export default class Home extends Component {
     this.setState({ loading: false })
   }
 
+  loadProfile = () => {
+    if(this.state.data.id){
+      const { data: { full_name, profile_picture } } = this.state
+      return (
+        <UserProfile 
+          text={full_name} 
+          title="Front-end developer" 
+          profile_picture={profile_picture}
+        />
+      )
+    }
+     
+  }
+
   checkAuthState() {
     if(this.state.authorized) {
-      return(
-        <button
-          className="btn btn-success"
-        >
-          Get images from Instagram
-        </button>
-      )
+      return true
     }
     return false
   }
@@ -68,16 +75,19 @@ export default class Home extends Component {
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
     this.setState({ loading: true })
-    window.location.assign(API_URL_WITH_PUBLIC_CONTENT)
+    window.location.assign(API_URL+SCOPES)
   }
 
   showHideAuthButton = () => {
-    if(this.state.authorized){
+    const { authorized, data: { full_name } } = this.state
+
+    if(authorized){
       return (
         <div>
           <h5>
-            Thanks! You've Been Authorized. 
-            Now Let's have some fun with the API!
+            {
+              full_name ? 'Welcome Back '+full_name : 'Thanks! You\'ve Been Authorized. Now Let\'s have some fun with the API!'
+            }
           </h5>
         </div>
       )
@@ -98,13 +108,16 @@ export default class Home extends Component {
     const { value } = this.state
     console.log('this.state',this.state)
 		return (
-			<div>
+			<div className="text-center">
         <h3>{ value }</h3>
         <div>
           {this.showHideAuthButton()}
         </div>
         <div>
           {this.checkAuthState()}
+        </div>
+        <div>
+          {this.loadProfile()}
         </div>
 			</div>
 		);

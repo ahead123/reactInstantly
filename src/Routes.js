@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import Home from './Home';
+import App from './App';
 import Privacy from './Privacy';
 import Dashboard from './Dashboard';
 import NavigationLink from './NavigationLink';
@@ -27,8 +27,7 @@ class Routes extends Component {
 				</div>
 
 		    <div className="container col-md-12">
-		    	<Route exact path="/" component={Home} />
-		      <Route path="/home" component={Home} />
+		    	<Route exact path="/" component={App} />
 		      <Route path="/privacy" component={Privacy} />
 		      <Route path="/dashboard" component={Dashboard} />
 		    </div>

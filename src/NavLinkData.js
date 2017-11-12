@@ -1,5 +1,5 @@
 const navData = [
-	{ path: '/home', text: 'Instagram' },
+	{ path: '/', text: 'Home' },
 	{ path: '/privacy', text: 'Privacy' },
 	{ path: '/dashboard', text: 'Dashboard' }
 ]
