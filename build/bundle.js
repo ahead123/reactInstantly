@@ -16454,9 +16454,9 @@ var Home = function (_Component) {
           'Access-Control-Allow-Methods': 'GET'
         }
       }).then(function (response) {
-        return response.text();
-      }).then(function (contents) {
-        return console.log(contents);
+        return console.log(response);
+      }).then(function (json) {
+        return console.log(json);
       }).catch(function (error) {
         return console.log(error);
       });
