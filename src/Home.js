@@ -15,8 +15,9 @@ export default class Home extends Component {
     event.preventDefault()
     fetch(API_URL, {
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'text/html; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET'
       }
     })
     .catch(error => console.log(error))

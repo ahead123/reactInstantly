@@ -16449,8 +16449,9 @@ var Home = function (_Component) {
       event.preventDefault();
       fetch(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* API_URL */], {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Content-Type': 'text/html; charset=utf-8',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
         }
       }).catch(function (error) {
         return console.log(error);
