@@ -16451,10 +16451,33 @@ var Home = function (_Component) {
       window.location.assign(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* TEST_API_URL */]);
     };
 
+    _this.showHideButton = function () {
+      if (_this.state.authorized) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h5',
+            null,
+            'Thanks! You\'ve Been Authorized. Now Let\'s have some fun with the API!'
+          )
+        );
+      }
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'button',
+        {
+          className: 'btn btn-primary',
+          onClick: _this.handleInstagramAPIRequest
+        },
+        _this.state.loading ? 'Navigating to Instagram...' : 'Authorize with Instagram'
+      );
+    };
+
     _this.state = {
       value: 'Instagram API',
       access_token: '',
-      loading: false
+      loading: false,
+      authorized: false
     };
     return _this;
   }
@@ -16462,11 +16485,15 @@ var Home = function (_Component) {
   _createClass(Home, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var access_token = void 0;
+      var access_token = void 0,
+          authorized = false;
+
       if (window.location.href.indexOf('access_token') > -1) {
         access_token = window.location.href.split('access_token=')[1].trim();
+        authorized = true;
         this.setState({
-          access_token: access_token
+          access_token: access_token,
+          authorized: authorized
         });
       }
       this.setState({ loading: false });
@@ -16488,14 +16515,7 @@ var Home = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            {
-              className: 'btn btn-primary',
-              onClick: this.handleInstagramAPIRequest
-            },
-            this.state.loading ? 'Navigating to Instagram...' : 'Authorize with Instagram'
-          )
+          this.showHideButton()
         )
       );
     }

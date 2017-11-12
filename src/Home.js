@@ -9,16 +9,20 @@ export default class Home extends Component {
     this.state = {
       value: 'Instagram API',
       access_token: '',
-      loading: false
+      loading: false,
+      authorized: false
     };
   }
 
   componentDidMount() {
-    let access_token;
+    let access_token, authorized=false;
+
     if(window.location.href.indexOf('access_token')>-1) {
        access_token = window.location.href.split('access_token=')[1].trim()
+       authorized = true
       this.setState({
-        access_token
+        access_token,
+        authorized
       })
     }
     this.setState({ loading: false })
@@ -30,6 +34,26 @@ export default class Home extends Component {
     window.location.assign(TEST_API_URL)
   }
 
+  showHideButton = () => {
+    if(this.state.authorized){
+      return (
+        <div>
+          <h5>Thanks! You've Been Authorized. Now Let's have some fun with the API!</h5>
+        </div>
+      )
+    }
+    return (
+      <button 
+        className="btn btn-primary"
+        onClick={this.handleInstagramAPIRequest}
+      >
+      {
+        this.state.loading ? 'Navigating to Instagram...' :'Authorize with Instagram' 
+      } 
+      </button>
+    )
+  }
+
 	render() {
     const { value } = this.state
     console.log(this.state)
@@ -37,12 +61,7 @@ export default class Home extends Component {
 			<div>
         <h3>{ value }</h3>
         <div>
-          <button 
-            className="btn btn-primary"
-            onClick={this.handleInstagramAPIRequest}
-          >
-            {this.state.loading ? 'Navigating to Instagram...' :'Authorize with Instagram' } 
-          </button>
+          {this.showHideButton()}
         </div>
 			</div>
 		);
