@@ -92,7 +92,7 @@ export default class App extends Component {
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
     this.setState({ loading: true })
-    window.location.assign(API_URL+SCOPES)
+    window.location.assign(TEST_API_URL+SCOPES)
   }
 
   showHideAuthButton = () => {

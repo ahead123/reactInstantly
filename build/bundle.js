@@ -17384,8 +17384,8 @@ var styles = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
-/* unused harmony export TEST_API_URL */
+/* unused harmony export API_URL */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TEST_API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return API_CALL_FOR_USER_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return API_CALL_FOR_USER_COMPLETE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
@@ -37735,7 +37735,7 @@ var App = function (_Component) {
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
       _this.setState({ loading: true });
-      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
+      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* TEST_API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
     };
 
     _this.showHideAuthButton = function () {
@@ -37878,20 +37878,20 @@ var App = function (_Component) {
 
 
 var ProfileImage = function ProfileImage(_ref) {
-       var thumbnailURL = _ref.thumbnailURL,
-           width = _ref.width,
-           height = _ref.height;
+			var thumbnailURL = _ref.thumbnailURL,
+			    width = _ref.width,
+			    height = _ref.height;
 
-       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "span",
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                     className: "img-fluid img-thumbnail",
-                     src: thumbnailURL,
-                     width: width,
-                     height: height
-              })
-       );
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						"span",
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+									className: "img-fluid img-thumbnail rounded-circle",
+									src: thumbnailURL,
+									width: width,
+									height: height
+						})
+			);
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (ProfileImage);
