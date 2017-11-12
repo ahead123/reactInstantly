@@ -16448,10 +16448,10 @@ var Home = function (_Component) {
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
       _this.setState({ loading: true });
-      window.location.assign(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* API_URL */]);
+      window.location.assign(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* API_URL_WITH_PUBLIC_CONTENT */]);
     };
 
-    _this.showHideButton = function () {
+    _this.showHideAuthButton = function () {
       if (_this.state.authorized) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
@@ -16477,12 +16477,36 @@ var Home = function (_Component) {
       value: 'Instagram API',
       access_token: '',
       loading: false,
-      authorized: false
+      authorized: false,
+      userData: []
     };
     return _this;
   }
 
   _createClass(Home, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      var _state = this.state,
+          access_token = _state.access_token,
+          authorized = _state.authorized;
+
+      if (!prevState.authorized && authorized) {
+        console.log('prevProps', prevProps);
+        console.log('prevState', prevState);
+        console.log('state inside update', this.state);
+        __WEBPACK_IMPORTED_MODULE_1_axios___default()(__WEBPACK_IMPORTED_MODULE_3__constants__["b" /* API_CALL_FOR_USER_PROFILE */] + access_token, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          }
+        }).then(function (response) {
+          console.log(response);
+        }).catch(function (error) {
+          return console.log(error);
+        });
+      }
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var access_token = void 0,
@@ -16491,19 +16515,30 @@ var Home = function (_Component) {
       if (window.location.href.indexOf('access_token') > -1) {
         access_token = window.location.href.split('access_token=')[1].trim();
         authorized = true;
-        this.setState({
-          access_token: access_token,
-          authorized: authorized
-        });
+        this.setState({ access_token: access_token, authorized: authorized });
       }
       this.setState({ loading: false });
+    }
+  }, {
+    key: 'checkAuthState',
+    value: function checkAuthState() {
+      if (this.state.authorized) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          {
+            className: 'btn btn-success'
+          },
+          'Get images from Instagram'
+        );
+      }
+      return false;
     }
   }, {
     key: 'render',
     value: function render() {
       var value = this.state.value;
 
-      console.log(this.state);
+      console.log('this.state', this.state);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
@@ -16515,7 +16550,12 @@ var Home = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           null,
-          this.showHideButton()
+          this.showHideAuthButton()
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          this.checkAuthState()
         )
       );
     }
@@ -17625,10 +17665,16 @@ __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
+/* unused harmony export API_URL */
 /* unused harmony export TEST_API_URL */
+/* unused harmony export TEST_API_URL_WITH_PUBLIC_CONTENT */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL_WITH_PUBLIC_CONTENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return API_CALL_FOR_USER_PROFILE; });
 var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token';
 var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=http://localhost:3000/&response_type=token';
+var TEST_API_URL_WITH_PUBLIC_CONTENT = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=http://localhost:3000/&response_type=token&scope=public_content';
+var API_URL_WITH_PUBLIC_CONTENT = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token&scope=public_content';
+var API_CALL_FOR_USER_PROFILE = 'https://api.instagram.com/v1/users/self/?access_token=';
 
 /***/ }),
 /* 263 */
