@@ -31,7 +31,7 @@ export default class Home extends Component {
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
     this.setState({ loading: true })
-    window.location.assign(TEST_API_URL)
+    window.location.assign(API_URL)
   }
 
   showHideButton = () => {
