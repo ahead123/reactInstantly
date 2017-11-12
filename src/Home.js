@@ -20,8 +20,9 @@ export default class Home extends Component {
         'Access-Control-Allow-Methods': 'GET'
       }
     })
-    .then(response => console.log(response))
-    .catch(error => console.log("error ",error))
+    .then(response => response.text())
+    .then(contents => console.log(contents))
+    .catch(error => console.log(error))
   }
 
 	render() {

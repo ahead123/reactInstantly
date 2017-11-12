@@ -16454,9 +16454,11 @@ var Home = function (_Component) {
           'Access-Control-Allow-Methods': 'GET'
         }
       }).then(function (response) {
-        return console.log(response);
+        return response.text();
+      }).then(function (contents) {
+        return console.log(contents);
       }).catch(function (error) {
-        return console.log("error ", error);
+        return console.log(error);
       });
     };
 
