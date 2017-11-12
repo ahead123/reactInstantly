@@ -37676,6 +37676,7 @@ var Privacy = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(263);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__UserProfile__ = __webpack_require__(581);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ProfileImage__ = __webpack_require__(590);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__(591);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37683,6 +37684,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -37701,10 +37703,10 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props, context));
 
     _this.loadProfile = function () {
-      if (_this.state.data.id) {
-        var _this$state$data = _this.state.data,
-            full_name = _this$state$data.full_name,
-            profile_picture = _this$state$data.profile_picture;
+      if (_this.state.store.data.length > 0) {
+        var _this$state$store$dat = _this.state.store.data,
+            full_name = _this$state$store$dat.full_name,
+            profile_picture = _this$state$store$dat.profile_picture;
 
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__UserProfile__["a" /* default */], {
           text: full_name,
@@ -37716,7 +37718,7 @@ var App = function (_Component) {
 
     _this.loadProfileImages = function () {
       var pics = [];
-      var data = _this.state.profileImages.data;
+      var data = _this.state.store.profileImages.data;
 
       if (data) {
         console.log('data', data);
@@ -37733,15 +37735,18 @@ var App = function (_Component) {
     };
 
     _this.handleInstagramAPIRequest = function (event) {
+      var loading = _this.state.store.loading;
+
       event.preventDefault();
       _this.setState({ loading: true });
       window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* TEST_API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
     };
 
     _this.showHideAuthButton = function () {
-      var _this$state = _this.state,
-          authorized = _this$state.authorized,
-          full_name = _this$state.data.full_name;
+      var _this$state$store = _this.state.store,
+          authorized = _this$state$store.authorized,
+          loading = _this$state$store.loading,
+          full_name = _this$state$store.data.full_name;
 
 
       if (authorized) {
@@ -37761,17 +37766,13 @@ var App = function (_Component) {
           className: 'btn btn-outline-primary',
           onClick: _this.handleInstagramAPIRequest
         },
-        _this.state.loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
+        loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
       );
     };
 
     _this.state = {
       value: 'Instagram API',
-      access_token: '',
-      loading: false,
-      authorized: false,
-      data: [],
-      profileImages: []
+      store: __WEBPACK_IMPORTED_MODULE_7__store__["a" /* store */]
     };
     return _this;
   }
@@ -37781,25 +37782,23 @@ var App = function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       var _this2 = this;
 
-      var _state = this.state,
-          access_token = _state.access_token,
-          authorized = _state.authorized,
-          data = _state.data;
+      var _state$store = this.state.store,
+          access_token = _state$store.access_token,
+          authorized = _state$store.authorized,
+          data = _state$store.data;
 
-      if (!prevState.authorized && authorized) {
-        console.log('prevProps', prevProps);
-        console.log('prevState', prevState);
-        console.log('state inside update', this.state);
+      if (!prevState.store.authorized && authorized) {
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* API_CALL_FOR_USER_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
-            console.log('error', error);
+            console.log(error);
           } else {
-            console.log('data', data);
             _this2.setState({ data: data.data });
           }
         });
       }
-      if (!prevState.data.id && data.id) {
+      if (!prevState.store.data.id && data.id) {
+        var profileImages = this.state.store.profileImages;
+
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["d" /* API_CALL_FOR_USER_COMPLETE_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
             console.log('error', error);
@@ -37813,23 +37812,29 @@ var App = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var access_token = void 0,
-          authorized = false;
+      var _state$store2 = this.state.store,
+          access_token = _state$store2.access_token,
+          authorized = _state$store2.authorized,
+          loading = _state$store2.loading;
 
       if (window.location.href.indexOf('access_token') > -1) {
-        access_token = window.location.href.split('access_token=')[1].trim();
-        authorized = true;
-        this.setState({ access_token: access_token, authorized: authorized });
+        var url = window.location.href.split('access_token=')[1].trim();
+        this.setState({
+          access_token: url,
+          authorized: true
+        });
+        console.log('this.state in did mount', this.state.store);
       }
       this.setState({ loading: false });
     }
   }, {
     key: 'render',
     value: function render() {
-      var value = this.state.value;
+      var _state = this.state,
+          store = _state.store,
+          value = _state.value;
 
-      console.log('this.state', this.state);
-      console.log('this.props', this.props);
+      console.log('store', store);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'text-center' },
@@ -37851,7 +37856,7 @@ var App = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: '' },
-          this.state.profileImages.data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          this.state.store.profileImages.data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h4',
             null,
             'Profile Images'
@@ -37895,6 +37900,22 @@ var ProfileImage = function ProfileImage(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (ProfileImage);
+
+/***/ }),
+/* 591 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return store; });
+var store = {
+  access_token: '',
+  loading: false,
+  authorized: false,
+  data: [],
+  profileImages: []
+};
+
+
 
 /***/ })
 /******/ ]);

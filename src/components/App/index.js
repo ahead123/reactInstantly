@@ -11,36 +11,30 @@ import {
 } from '../../constants';
 import UserProfile from '../UserProfile'
 import ProfileImage from '../ProfileImage'
+import { store } from '../../store'
 
 export default class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       value: 'Instagram API',
-      access_token: '',
-      loading: false,
-      authorized: false,
-      data: [],
-      profileImages: []
+      store
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { access_token, authorized, data } = this.state
-    if(!prevState.authorized && authorized){
-      console.log('prevProps',prevProps)
-      console.log('prevState',prevState)
-      console.log('state inside update', this.state)
+    const { store: { access_token, authorized, data } } = this.state
+    if(!prevState.store.authorized && authorized){
       jsonp(API_CALL_FOR_USER_PROFILE + access_token, null, (error, data) => {
         if(error){
-          console.log('error', error)
+          console.log(error)
         }else{
-          console.log('data', data)
           this.setState({ data: data.data })
         }
       })
     }
-    if(!prevState.data.id && data.id){
+    if(!prevState.store.data.id && data.id){
+      const { store: { profileImages } } = this.state
       jsonp(API_CALL_FOR_USER_COMPLETE_PROFILE + access_token, null, (error, data) => {
         if(error){
           console.log('error', error)
@@ -53,19 +47,21 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    let access_token, authorized=false;
-
+    const { store: { access_token, authorized, loading } } = this.state  
     if(window.location.href.indexOf('access_token')>-1) {
-       access_token = window.location.href.split('access_token=')[1].trim()
-       authorized = true
-      this.setState({ access_token, authorized })
+      let url = window.location.href.split('access_token=')[1].trim()
+      this.setState({ 
+       access_token: url, 
+        authorized: true
+      })
+      console.log('this.state in did mount',this.state.store)
     }
     this.setState({ loading: false })
   }
 
   loadProfile = () => {
-    if(this.state.data.id){
-      const { data: { full_name, profile_picture } } = this.state
+    if(this.state.store.data.length > 0){
+      const { store: { data: { full_name, profile_picture } } } = this.state
       return (
         <UserProfile 
           text={full_name} 
@@ -78,7 +74,7 @@ export default class App extends Component {
 
   loadProfileImages = () => {
     let pics = []
-    const { profileImages: { data } } = this.state
+    const { store: { profileImages: { data } } } = this.state
     if(data){
       console.log('data', data)
      data.map((item, index) => {
@@ -90,13 +86,14 @@ export default class App extends Component {
   }
 
   handleInstagramAPIRequest = (event) => {
+    const { store: { loading } } = this.state
     event.preventDefault()
     this.setState({ loading: true })
     window.location.assign(TEST_API_URL+SCOPES)
   }
 
   showHideAuthButton = () => {
-    const { authorized, data: { full_name } } = this.state
+    const { store: { authorized, loading, data: { full_name } } } = this.state
 
     if(authorized){
       return (
@@ -115,16 +112,15 @@ export default class App extends Component {
         onClick={this.handleInstagramAPIRequest}
       >
       {
-        this.state.loading ? 'Navigating to Instagram...' :'Instagram  AUTH' 
+        loading ? 'Navigating to Instagram...' :'Instagram  AUTH' 
       } 
       </button>
     )
   }
 
 	render() {
-    const { value } = this.state
-    console.log('this.state',this.state)
-    console.log('this.props',this.props)
+    const { store, value } = this.state
+    console.log('store',store)
 		return (
 			<div className="text-center">
         <h3>{ value }</h3>
@@ -136,7 +132,7 @@ export default class App extends Component {
         </div>
         <div className="">
          {
-          this.state.profileImages.data ? <h4>Profile Images</h4>: ''
+          this.state.store.profileImages.data ? <h4>Profile Images</h4>: ''
          }
           {this.loadProfileImages()}
         </div>

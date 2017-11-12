@@ -1,4 +1,4 @@
-const store = {
+let store = {
 	access_token: '',
   loading: false,
   authorized: false,
