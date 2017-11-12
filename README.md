@@ -31,6 +31,10 @@ heroku open
 * [React](https://reactjs.org/) - The web framework used
 * [Node](https://nodejs.org/en/) - Server used
 * [Webpack](https://webpack.js.org/) - For dependency bundling
+* [Express](https://expressjs.com/) - Node server framework
+* [Bootstrap 4](https://v4-alpha.getbootstrap.com/) - For styling
+
+
 
 ## License
 
