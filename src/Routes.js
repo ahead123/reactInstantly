@@ -20,8 +20,7 @@ class Routes extends Component {
 
 	render(){
 		return(
-			<div className="container">
-		   	
+			<div>
 				<nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">					
 					{this.buildNav()}
 				</nav>
@@ -39,7 +38,7 @@ class Routes extends Component {
 
 const styles = {
 	navStyles: {
-		paddingTop: 80
+		paddingTop: 300
 	}
 }	
 

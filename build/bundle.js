@@ -17346,7 +17346,7 @@ var Routes = function (_Component) {
 		value: function render() {
 			return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 				'div',
-				{ className: 'container' },
+				null,
 				__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 					'nav',
 					{ className: 'navbar navbar-expand-md navbar-dark fixed-top bg-dark' },
@@ -17368,7 +17368,7 @@ var Routes = function (_Component) {
 
 var styles = {
 	navStyles: {
-		paddingTop: 80
+		paddingTop: 300
 	}
 
 	// Render App to DOM
@@ -17389,8 +17389,9 @@ var styles = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return API_CALL_FOR_USER_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return API_CALL_FOR_USER_COMPLETE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
-var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token';
-var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=http://localhost:3000/&response_type=token';
+var CLIENT_ID = 'b02dd812498b4182b234086da2731631';
+var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token';
+var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=http://localhost:3000/&response_type=token';
 var API_CALL_FOR_USER_PROFILE = 'https://api.instagram.com/v1/users/self/?access_token=';
 var API_CALL_FOR_USER_COMPLETE_PROFILE = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=';
 var SCOPES = '&scope=public_content+follower_list+comments+relationships+likes';
@@ -37769,8 +37770,8 @@ var App = function (_Component) {
           pics.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ProfileImage__["a" /* default */], {
             key: index,
             thumbnailURL: url,
-            width: '120',
-            height: '120',
+            width: width,
+            height: height,
             count: count,
             likes: likes.count,
             caption: text

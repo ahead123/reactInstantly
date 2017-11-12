@@ -91,8 +91,8 @@ export default class App extends Component {
           <ProfileImage
             key={index} 
             thumbnailURL={url} 
-            width="120" 
-            height="120" 
+            width={width} 
+            height={height} 
             count={count} 
             likes={likes.count}
             caption={text} 
