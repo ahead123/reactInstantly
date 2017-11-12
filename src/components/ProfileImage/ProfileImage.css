@@ -1,5 +1,5 @@
 .card-profile {
-  width: 340px;
+  max-width: 340px;
   margin: 50px auto;
   border-radius: 0;
   border: 0;

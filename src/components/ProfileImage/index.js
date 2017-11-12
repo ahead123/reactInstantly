@@ -3,7 +3,7 @@ import './ProfileImage.css'
 
 const ProfileImage = ({ thumbnailURL, width, height, count, likes, caption }) => {
 	return (   
-  	<div className="col-4" style={{ marginTop: 80}}>
+  	<div className="col-lg-3" style={{ marginTop: 80}}>
   		<div className="card card-profile">
   			<div className="card-block">
   				<img 
