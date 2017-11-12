@@ -37444,7 +37444,10 @@ function toComment(sourceMap) {
 var UserProfile = function UserProfile(_ref) {
 	var text = _ref.text,
 	    title = _ref.title,
-	    profile_picture = _ref.profile_picture;
+	    profile_picture = _ref.profile_picture,
+	    followers = _ref.followers,
+	    following = _ref.following,
+	    posts = _ref.posts;
 
 	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 		'div',
@@ -37468,6 +37471,36 @@ var UserProfile = function UserProfile(_ref) {
 					'small',
 					null,
 					title
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'small',
+					null,
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'span',
+						{ className: 'badge badge-primary' },
+						'Followers ',
+						followers
+					)
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'small',
+					null,
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'span',
+						{ className: 'badge badge-info' },
+						'Following ',
+						following
+					)
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'small',
+					null,
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'span',
+						{ className: 'badge badge-success' },
+						'Posts ',
+						posts
+					)
 				)
 			)
 		)
@@ -37704,12 +37737,16 @@ var App = function (_Component) {
       if (_this.state.data.id) {
         var _this$state$data = _this.state.data,
             full_name = _this$state$data.full_name,
-            profile_picture = _this$state$data.profile_picture;
+            profile_picture = _this$state$data.profile_picture,
+            counts = _this$state$data.counts;
 
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__UserProfile__["a" /* default */], {
           text: full_name,
           title: 'Front end developer',
-          profile_picture: profile_picture
+          profile_picture: profile_picture,
+          followers: counts.followed_by,
+          following: counts.follows,
+          posts: counts.media
         });
       }
     };
@@ -37719,21 +37756,23 @@ var App = function (_Component) {
       var data = _this.state.profileImages.data;
 
       if (data) {
-        console.log('data', data);
         data.map(function (item, index) {
-          var _item$images$thumbnai = item.images.thumbnail,
+          var text = item.caption.text,
+              _item$images$thumbnai = item.images.thumbnail,
               width = _item$images$thumbnai.width,
               height = _item$images$thumbnai.height,
-              url = _item$images$thumbnai.url;
-          var count = item.comments.count;
-          var text = item.caption.text;
+              url = _item$images$thumbnai.url,
+              count = item.comments.count,
+              likes = item.likes;
+
 
           pics.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ProfileImage__["a" /* default */], {
+            key: index,
             thumbnailURL: url,
             width: '120',
             height: '120',
             count: count,
-            likes: item.likes.count,
+            likes: likes.count,
             caption: text
           }));
         });
@@ -37757,7 +37796,6 @@ var App = function (_Component) {
           loading = _this$state.loading,
           full_name = _this$state.data.full_name;
 
-
       if (authorized) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
@@ -37765,7 +37803,7 @@ var App = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h5',
             null,
-            full_name ? 'Welcome Back ' + full_name : ''
+            full_name ? 'Welcome back! ' + full_name : ''
           )
         );
       }
@@ -37801,14 +37839,10 @@ var App = function (_Component) {
           data = _state.data;
 
       if (!prevState.authorized && authorized) {
-        console.log('prevProps', prevProps);
-        console.log('prevState', prevState);
-        console.log('state inside update', this.state);
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* API_CALL_FOR_USER_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
             console.log('error', error);
           } else {
-            console.log('data', data);
             _this2.setState({ data: data.data });
           }
         });
@@ -37818,7 +37852,6 @@ var App = function (_Component) {
           if (error) {
             console.log('error', error);
           } else {
-            console.log('data', data);
             _this2.setState({ profileImages: data });
           }
         });
@@ -37845,7 +37878,6 @@ var App = function (_Component) {
           data = _state2.profileImages.data;
 
       console.log('this.state', this.state);
-      console.log('this.props', this.props);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
@@ -37944,7 +37976,7 @@ var ProfileImage = function ProfileImage(_ref) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'badge badge-primary' },
-              'Comments: ',
+              'Comments ',
               count
             )
           ),
@@ -37954,7 +37986,7 @@ var ProfileImage = function ProfileImage(_ref) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
               { className: 'badge badge-info' },
-              'Likes: ',
+              'Likes ',
               likes
             )
           ),
@@ -37963,7 +37995,7 @@ var ProfileImage = function ProfileImage(_ref) {
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'span',
-              { className: 'badge badge-warning' },
+              { className: 'badge badge-success' },
               'hashTag#'
             ),
             ' ',

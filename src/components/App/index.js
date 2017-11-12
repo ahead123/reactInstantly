@@ -28,14 +28,10 @@ export default class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { access_token, authorized, data } = this.state
     if(!prevState.authorized && authorized){
-      console.log('prevProps',prevProps)
-      console.log('prevState',prevState)
-      console.log('state inside update', this.state)
       jsonp(API_CALL_FOR_USER_PROFILE + access_token, null, (error, data) => {
         if(error){
           console.log('error', error)
         }else{
-          console.log('data', data)
           this.setState({ data: data.data })
         }
       })
@@ -45,7 +41,6 @@ export default class App extends Component {
         if(error){
           console.log('error', error)
         }else{
-          console.log('data', data)
           this.setState({ profileImages: data })
         }
       })
@@ -65,12 +60,15 @@ export default class App extends Component {
 
   loadProfile = () => {
     if(this.state.data.id){
-      const { data: { full_name, profile_picture } } = this.state
+      const { data: { full_name, profile_picture, counts } } = this.state
       return (
         <UserProfile 
           text={full_name} 
           title="Front end developer" 
           profile_picture={profile_picture}
+          followers={counts.followed_by}
+          following={counts.follows}
+          posts={counts.media}
         />
       )
     }   
@@ -80,18 +78,23 @@ export default class App extends Component {
     let pics = []
     const { profileImages: { data } } = this.state
     if(data){
-      console.log('data', data)
      data.map((item, index) => {
-        const { width, height, url } = item.images.thumbnail
-        const { count } = item.comments
-        const { text } = item.caption
+
+        const { 
+          caption: { text },  
+          images: { thumbnail: { width, height, url } },
+          comments: { count },
+          likes 
+        } = item
+
         pics.push(
-          <ProfileImage 
+          <ProfileImage
+            key={index} 
             thumbnailURL={url} 
             width="120" 
             height="120" 
             count={count} 
-            likes={item.likes.count}
+            likes={likes.count}
             caption={text} 
           />
         )
@@ -108,13 +111,12 @@ export default class App extends Component {
 
   showHideAuthButton = () => {
     const { authorized, loading, data: { full_name } } = this.state
-
     if(authorized){
       return (
         <div>
           <h5>
             {
-              full_name ? 'Welcome Back '+full_name : ''
+              full_name ? 'Welcome back! '+full_name : ''
             }
           </h5>
         </div>
@@ -135,7 +137,6 @@ export default class App extends Component {
 	render() {
     const { value, profileImages: { data } } = this.state
     console.log('this.state',this.state)
-    console.log('this.props',this.props)
 		return (
 			<div>
         <div className="row">
