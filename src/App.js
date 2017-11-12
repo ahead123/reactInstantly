@@ -5,11 +5,10 @@ import 'whatwg-fetch';
 import { 
   API_URL, 
   TEST_API_URL,
-  API_CALL_FOR_USER_PROFILE
+  API_CALL_FOR_USER_PROFILE,
+  SCOPES
 } from './constants';
-import UserProfile from './UserProfile'
-
-const SCOPES = '&scope=public_content+follower_list+comments+relationships+likes';
+import UserProfile from './components/UserProfile'
 
 export default class App extends Component {
   constructor(props, context) {
@@ -57,19 +56,12 @@ export default class App extends Component {
       return (
         <UserProfile 
           text={full_name} 
-          title="Front-end developer" 
+          title="Front end developer" 
           profile_picture={profile_picture}
         />
       )
     }
      
-  }
-
-  checkAuthState() {
-    if(this.state.authorized) {
-      return true
-    }
-    return false
   }
 
   handleInstagramAPIRequest = (event) => {
@@ -86,7 +78,7 @@ export default class App extends Component {
         <div>
           <h5>
             {
-              full_name ? 'Welcome Back '+full_name : 'Thanks! You\'ve Been Authorized. Now Let\'s have some fun with the API!'
+              full_name ? 'Welcome Back '+full_name : ''
             }
           </h5>
         </div>
@@ -94,11 +86,11 @@ export default class App extends Component {
     }
     return (
       <button 
-        className="btn btn-primary"
+        className="btn btn-outline-primary"
         onClick={this.handleInstagramAPIRequest}
       >
       {
-        this.state.loading ? 'Navigating to Instagram...' :'Authorize with Instagram' 
+        this.state.loading ? 'Navigating to Instagram...' :'Instagram  AUTH' 
       } 
       </button>
     )
@@ -107,14 +99,12 @@ export default class App extends Component {
 	render() {
     const { value } = this.state
     console.log('this.state',this.state)
+    console.log('this.props',this.props)
 		return (
 			<div className="text-center">
         <h3>{ value }</h3>
         <div>
           {this.showHideAuthButton()}
-        </div>
-        <div>
-          {this.checkAuthState()}
         </div>
         <div>
           {this.loadProfile()}

@@ -6,7 +6,7 @@ const UserProfile = ({ text, title, profile_picture }) => {
 		<div className="card card-profile text-center">
 			<img 
 				className="card-img-top" 
-				src="https://unsplash.it/340/160?image=354" 
+				src="https://goo.gl/uoM8jp" 
 			/>
 			<div className="card-block">
 				<img 

@@ -1,32 +1,32 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import App from './App';
-import Privacy from './Privacy';
-import Dashboard from './Dashboard';
-import NavigationLink from './NavigationLink';
-import { navData } from './NavLinkData';
+import Privacy from './components/Privacy';
+import Dashboard from './components/Dashboard';
+import NavigationLink from './components/NavigationLink';
+import { navData } from './components/NavigationLink/NavLinkData';
 
 class Routes extends Component {
 
 	buildNav = () => {
-		let navLinks = []
+		let navLinks = [<Link className="navbar-brand" to="/">instaReact</Link>]
 		navData.forEach((item, index) => {
 			 navLinks.push(<NavigationLink path={item.path} text={item.text} key={index} />)
 		})
-		return <ul className="nav">{ navLinks }</ul>		
+		return <ul className="navbar-nav mr-auto">{ navLinks }</ul>		
 	}
 
 	render(){
 		return(
 			<div className="container">
 		   	
-				<div className="container col-md-12">
-					 {this.buildNav()}
-				</div>
+				<nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">					
+					{this.buildNav()}
+				</nav>
 
-		    <div className="container col-md-12">
+		    <div className="container col-md-12" style={styles.navBuffer}>
 		    	<Route exact path="/" component={App} />
 		      <Route path="/privacy" component={Privacy} />
 		      <Route path="/dashboard" component={Dashboard} />
@@ -35,10 +35,16 @@ class Routes extends Component {
 		  </div>
 		)
 	}
+}
+
+const styles = {
+	navBuffer: {
+		paddingTop: 80
+	}
 }	
 
 // Render App to DOM
-ReactDOM.render((
+render((
 	<BrowserRouter>
 		<Routes />
 	</BrowserRouter>
