@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import App from './App';
+import App from './components/App';
 import Privacy from './components/Privacy';
 import Dashboard from './components/Dashboard';
 import NavigationLink from './components/NavigationLink';
@@ -26,7 +26,7 @@ class Routes extends Component {
 					{this.buildNav()}
 				</nav>
 
-		    <div className="container col-md-12" style={styles.navBuffer}>
+		    <div className="container col-md-12" style={styles.navStyles}>
 		    	<Route exact path="/" component={App} />
 		      <Route path="/privacy" component={Privacy} />
 		      <Route path="/dashboard" component={Dashboard} />
@@ -38,7 +38,7 @@ class Routes extends Component {
 }
 
 const styles = {
-	navBuffer: {
+	navStyles: {
 		paddingTop: 80
 	}
 }	

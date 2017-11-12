@@ -17287,7 +17287,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__(242);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__App__ = __webpack_require__(580);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_App__ = __webpack_require__(588);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Privacy__ = __webpack_require__(587);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Dashboard__ = __webpack_require__(586);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_NavigationLink__ = __webpack_require__(584);
@@ -17354,8 +17354,8 @@ var Routes = function (_Component) {
 				),
 				__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 					'div',
-					{ className: 'container col-md-12', style: styles.navBuffer },
-					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Route */], { exact: true, path: '/', component: __WEBPACK_IMPORTED_MODULE_4__App__["a" /* default */] }),
+					{ className: 'container col-md-12', style: styles.navStyles },
+					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Route */], { exact: true, path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_App__["a" /* default */] }),
 					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Route */], { path: '/privacy', component: __WEBPACK_IMPORTED_MODULE_5__components_Privacy__["a" /* default */] }),
 					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Route */], { path: '/dashboard', component: __WEBPACK_IMPORTED_MODULE_6__components_Dashboard__["a" /* default */] })
 				)
@@ -17367,7 +17367,7 @@ var Routes = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
 
 var styles = {
-	navBuffer: {
+	navStyles: {
 		paddingTop: 80
 	}
 
@@ -17387,10 +17387,12 @@ var styles = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
 /* unused harmony export TEST_API_URL */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return API_CALL_FOR_USER_PROFILE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return API_CALL_FOR_USER_COMPLETE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
 var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token';
 var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=b02dd812498b4182b234086da2731631&redirect_uri=http://localhost:3000/&response_type=token';
 var API_CALL_FOR_USER_PROFILE = 'https://api.instagram.com/v1/users/self/?access_token=';
+var API_CALL_FOR_USER_COMPLETE_PROFILE = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=';
 var SCOPES = '&scope=public_content+follower_list+comments+relationships+likes';
 
 /***/ }),
@@ -37427,172 +37429,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 580 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return App; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(243);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonp__ = __webpack_require__(488);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jsonp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__ = __webpack_require__(574);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_UserProfile__ = __webpack_require__(581);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-
-var App = function (_Component) {
-  _inherits(App, _Component);
-
-  function App(props, context) {
-    _classCallCheck(this, App);
-
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props, context));
-
-    _this.loadProfile = function () {
-      if (_this.state.data.id) {
-        var _this$state$data = _this.state.data,
-            full_name = _this$state$data.full_name,
-            profile_picture = _this$state$data.profile_picture;
-
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_UserProfile__["a" /* default */], {
-          text: full_name,
-          title: 'Front end developer',
-          profile_picture: profile_picture
-        });
-      }
-    };
-
-    _this.handleInstagramAPIRequest = function (event) {
-      event.preventDefault();
-      _this.setState({ loading: true });
-      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
-    };
-
-    _this.showHideAuthButton = function () {
-      var _this$state = _this.state,
-          authorized = _this$state.authorized,
-          full_name = _this$state.data.full_name;
-
-
-      if (authorized) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h5',
-            null,
-            full_name ? 'Welcome Back ' + full_name : ''
-          )
-        );
-      }
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'button',
-        {
-          className: 'btn btn-outline-primary',
-          onClick: _this.handleInstagramAPIRequest
-        },
-        _this.state.loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
-      );
-    };
-
-    _this.state = {
-      value: 'Instagram API',
-      access_token: '',
-      loading: false,
-      authorized: false,
-      data: []
-    };
-    return _this;
-  }
-
-  _createClass(App, [{
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      var _this2 = this;
-
-      var _state = this.state,
-          access_token = _state.access_token,
-          authorized = _state.authorized;
-
-      if (!prevState.authorized && authorized) {
-        console.log('prevProps', prevProps);
-        console.log('prevState', prevState);
-        console.log('state inside update', this.state);
-        __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* API_CALL_FOR_USER_PROFILE */] + access_token, null, function (error, data) {
-          if (error) {
-            console.log('error', error);
-          } else {
-            console.log('data', data);
-            _this2.setState({ data: data.data });
-          }
-        });
-      }
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var access_token = void 0,
-          authorized = false;
-
-      if (window.location.href.indexOf('access_token') > -1) {
-        access_token = window.location.href.split('access_token=')[1].trim();
-        authorized = true;
-        this.setState({ access_token: access_token, authorized: authorized });
-      }
-      this.setState({ loading: false });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var value = this.state.value;
-
-      console.log('this.state', this.state);
-      console.log('this.props', this.props);
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'text-center' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'h3',
-          null,
-          value
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          null,
-          this.showHideAuthButton()
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          null,
-          this.loadProfile()
-        )
-      );
-    }
-  }]);
-
-  return App;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-
-
-/***/ }),
+/* 580 */,
 /* 581 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37821,6 +37658,243 @@ var Privacy = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 
+
+/***/ }),
+/* 588 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return App; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonp__ = __webpack_require__(488);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jsonp__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__ = __webpack_require__(574);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__UserProfile__ = __webpack_require__(581);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ProfileImage__ = __webpack_require__(590);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+
+var App = function (_Component) {
+  _inherits(App, _Component);
+
+  function App(props, context) {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props, context));
+
+    _this.loadProfile = function () {
+      if (_this.state.data.id) {
+        var _this$state$data = _this.state.data,
+            full_name = _this$state$data.full_name,
+            profile_picture = _this$state$data.profile_picture;
+
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__UserProfile__["a" /* default */], {
+          text: full_name,
+          title: 'Front end developer',
+          profile_picture: profile_picture
+        });
+      }
+    };
+
+    _this.loadProfileImages = function () {
+      var pics = [];
+      var data = _this.state.profileImages.data;
+
+      if (data) {
+        console.log('data', data);
+        data.map(function (item, index) {
+          var _item$images$thumbnai = item.images.thumbnail,
+              width = _item$images$thumbnai.width,
+              height = _item$images$thumbnai.height,
+              url = _item$images$thumbnai.url;
+
+          pics.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ProfileImage__["a" /* default */], { thumbnailURL: url, width: width, height: height }));
+        });
+      }
+      return pics;
+    };
+
+    _this.handleInstagramAPIRequest = function (event) {
+      event.preventDefault();
+      _this.setState({ loading: true });
+      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
+    };
+
+    _this.showHideAuthButton = function () {
+      var _this$state = _this.state,
+          authorized = _this$state.authorized,
+          full_name = _this$state.data.full_name;
+
+
+      if (authorized) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h5',
+            null,
+            full_name ? 'Welcome Back ' + full_name : ''
+          )
+        );
+      }
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'button',
+        {
+          className: 'btn btn-outline-primary',
+          onClick: _this.handleInstagramAPIRequest
+        },
+        _this.state.loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
+      );
+    };
+
+    _this.state = {
+      value: 'Instagram API',
+      access_token: '',
+      loading: false,
+      authorized: false,
+      data: [],
+      profileImages: []
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      var _this2 = this;
+
+      var _state = this.state,
+          access_token = _state.access_token,
+          authorized = _state.authorized,
+          data = _state.data;
+
+      if (!prevState.authorized && authorized) {
+        console.log('prevProps', prevProps);
+        console.log('prevState', prevState);
+        console.log('state inside update', this.state);
+        __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* API_CALL_FOR_USER_PROFILE */] + access_token, null, function (error, data) {
+          if (error) {
+            console.log('error', error);
+          } else {
+            console.log('data', data);
+            _this2.setState({ data: data.data });
+          }
+        });
+      }
+      if (!prevState.data.id && data.id) {
+        __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["d" /* API_CALL_FOR_USER_COMPLETE_PROFILE */] + access_token, null, function (error, data) {
+          if (error) {
+            console.log('error', error);
+          } else {
+            console.log('data', data);
+            _this2.setState({ profileImages: data });
+          }
+        });
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var access_token = void 0,
+          authorized = false;
+
+      if (window.location.href.indexOf('access_token') > -1) {
+        access_token = window.location.href.split('access_token=')[1].trim();
+        authorized = true;
+        this.setState({ access_token: access_token, authorized: authorized });
+      }
+      this.setState({ loading: false });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var value = this.state.value;
+
+      console.log('this.state', this.state);
+      console.log('this.props', this.props);
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'text-center' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h3',
+          null,
+          value
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          this.showHideAuthButton()
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          this.loadProfile()
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: '' },
+          this.state.profileImages.data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h4',
+            null,
+            'Profile Images'
+          ) : '',
+          this.loadProfileImages()
+        )
+      );
+    }
+  }]);
+
+  return App;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+
+
+/***/ }),
+/* 589 */,
+/* 590 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var ProfileImage = function ProfileImage(_ref) {
+       var thumbnailURL = _ref.thumbnailURL,
+           width = _ref.width,
+           height = _ref.height;
+
+       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "span",
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+                     className: "img-fluid img-thumbnail",
+                     src: thumbnailURL,
+                     width: width,
+                     height: height
+              })
+       );
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (ProfileImage);
 
 /***/ })
 /******/ ]);

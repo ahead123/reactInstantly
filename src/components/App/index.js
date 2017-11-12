@@ -6,9 +6,11 @@ import {
   API_URL, 
   TEST_API_URL,
   API_CALL_FOR_USER_PROFILE,
+  API_CALL_FOR_USER_COMPLETE_PROFILE,
   SCOPES
-} from './constants';
-import UserProfile from './components/UserProfile'
+} from '../../constants';
+import UserProfile from '../UserProfile'
+import ProfileImage from '../ProfileImage'
 
 export default class App extends Component {
   constructor(props, context) {
@@ -18,12 +20,13 @@ export default class App extends Component {
       access_token: '',
       loading: false,
       authorized: false,
-      data: []
+      data: [],
+      profileImages: []
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { access_token, authorized } = this.state
+    const { access_token, authorized, data } = this.state
     if(!prevState.authorized && authorized){
       console.log('prevProps',prevProps)
       console.log('prevState',prevState)
@@ -34,6 +37,16 @@ export default class App extends Component {
         }else{
           console.log('data', data)
           this.setState({ data: data.data })
+        }
+      })
+    }
+    if(!prevState.data.id && data.id){
+      jsonp(API_CALL_FOR_USER_COMPLETE_PROFILE + access_token, null, (error, data) => {
+        if(error){
+          console.log('error', error)
+        }else{
+          console.log('data', data)
+          this.setState({ profileImages: data })
         }
       })
     }
@@ -60,8 +73,20 @@ export default class App extends Component {
           profile_picture={profile_picture}
         />
       )
+    }   
+  }
+
+  loadProfileImages = () => {
+    let pics = []
+    const { profileImages: { data } } = this.state
+    if(data){
+      console.log('data', data)
+     data.map((item, index) => {
+        const { width, height, url } = item.images.thumbnail
+        pics.push(<ProfileImage thumbnailURL={url} width={width} height={height} />)
+      })
     }
-     
+    return pics
   }
 
   handleInstagramAPIRequest = (event) => {
@@ -108,6 +133,12 @@ export default class App extends Component {
         </div>
         <div>
           {this.loadProfile()}
+        </div>
+        <div className="">
+         {
+          this.state.profileImages.data ? <h4>Profile Images</h4>: ''
+         }
+          {this.loadProfileImages()}
         </div>
 			</div>
 		);
