@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import 'whatwg-fetch';
-import { API_URL } from './constants';
+import { API_URL, TEST_API_URL } from './constants';
 
 export default class Home extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       value: 'Instagram API'
     };
@@ -13,16 +13,7 @@ export default class Home extends Component {
 
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
-    fetch(API_URL, {
-      headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET'
-      }
-    })
-    .then(response => console.log(response))
-    .then(json => console.log(json))
-    .catch(error => console.log(error))
+    window.location.assign(TEST_API_URL)
   }
 
 	render() {
