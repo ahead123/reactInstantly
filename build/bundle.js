@@ -16447,20 +16447,36 @@ var Home = function (_Component) {
 
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
+      _this.setState({ loading: true });
       window.location.assign(__WEBPACK_IMPORTED_MODULE_3__constants__["a" /* TEST_API_URL */]);
     };
 
     _this.state = {
-      value: 'Instagram API'
+      value: 'Instagram API',
+      access_token: '',
+      loading: false
     };
     return _this;
   }
 
   _createClass(Home, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var access_token = void 0;
+      if (window.location.href.indexOf('access_token') > -1) {
+        access_token = window.location.href.split('access_token=')[1].trim();
+        this.setState({
+          access_token: access_token
+        });
+      }
+      this.setState({ loading: false });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var value = this.state.value;
 
+      console.log(this.state);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
@@ -16478,7 +16494,7 @@ var Home = function (_Component) {
               className: 'btn btn-primary',
               onClick: this.handleInstagramAPIRequest
             },
-            'Use Instagram API'
+            this.state.loading ? 'Navigating to Instagram...' : 'Authorize with Instagram'
           )
         )
       );
