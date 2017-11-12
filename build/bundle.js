@@ -17384,8 +17384,8 @@ var styles = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export API_URL */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TEST_API_URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
+/* unused harmony export TEST_API_URL */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return API_CALL_FOR_USER_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return API_CALL_FOR_USER_COMPLETE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
@@ -37725,22 +37725,36 @@ var App = function (_Component) {
               width = _item$images$thumbnai.width,
               height = _item$images$thumbnai.height,
               url = _item$images$thumbnai.url;
+          var count = item.comments.count;
+          var text = item.caption.text;
 
-          pics.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ProfileImage__["a" /* default */], { thumbnailURL: url, width: width, height: height }));
+          pics.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ProfileImage__["a" /* default */], {
+            thumbnailURL: url,
+            width: '120',
+            height: '120',
+            count: count,
+            likes: item.likes.count,
+            caption: text
+          }));
         });
       }
-      return pics;
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'row' },
+        pics
+      );
     };
 
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
       _this.setState({ loading: true });
-      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* TEST_API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
+      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
     };
 
     _this.showHideAuthButton = function () {
       var _this$state = _this.state,
           authorized = _this$state.authorized,
+          loading = _this$state.loading,
           full_name = _this$state.data.full_name;
 
 
@@ -37761,7 +37775,7 @@ var App = function (_Component) {
           className: 'btn btn-outline-primary',
           onClick: _this.handleInstagramAPIRequest
         },
-        _this.state.loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
+        loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
       );
     };
 
@@ -37826,37 +37840,55 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var value = this.state.value;
+      var _state2 = this.state,
+          value = _state2.value,
+          data = _state2.profileImages.data;
 
       console.log('this.state', this.state);
       console.log('this.props', this.props);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: 'text-center' },
+        null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'h3',
-          null,
-          value
+          'div',
+          { className: 'row' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-md-12 text-center' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h3',
+              null,
+              value
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              this.showHideAuthButton()
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              this.loadProfile()
+            )
+          )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          null,
-          this.showHideAuthButton()
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          null,
-          this.loadProfile()
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: '' },
-          this.state.profileImages.data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h4',
-            null,
-            'Profile Images'
-          ) : '',
-          this.loadProfileImages()
+          { className: 'row' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'text-center' },
+            data ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h4',
+              null,
+              'Profile Images'
+            ) : '',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              this.loadProfileImages()
+            )
+          )
         )
       );
     }
@@ -37875,26 +37907,121 @@ var App = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProfileImage_css__ = __webpack_require__(593);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProfileImage_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ProfileImage_css__);
+
 
 
 var ProfileImage = function ProfileImage(_ref) {
-			var thumbnailURL = _ref.thumbnailURL,
-			    width = _ref.width,
-			    height = _ref.height;
+  var thumbnailURL = _ref.thumbnailURL,
+      width = _ref.width,
+      height = _ref.height,
+      count = _ref.count,
+      likes = _ref.likes,
+      caption = _ref.caption;
 
-			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						"span",
-						null,
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-									className: "img-fluid img-thumbnail rounded-circle",
-									src: thumbnailURL,
-									width: width,
-									height: height
-						})
-			);
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'div',
+    { className: 'col-4', style: { marginTop: 80 } },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'card card-profile' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'card-block' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+          className: 'card-img-profile',
+          src: thumbnailURL,
+          width: width,
+          height: height
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h4',
+          { className: 'card-title' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'small',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'badge badge-primary' },
+              'Comments: ',
+              count
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'small',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'badge badge-info' },
+              'Likes: ',
+              likes
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'small',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'badge badge-warning' },
+              'hashTag#'
+            ),
+            ' ',
+            caption
+          )
+        )
+      )
+    )
+  );
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (ProfileImage);
+
+/***/ }),
+/* 591 */,
+/* 592 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(579)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".card-profile {\n  width: 340px;\n  margin: 50px auto;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 1em 1em 2em rgba(0,0,0,.2);\n}\n\n.card-img-top {\n  border-radius: 0;\n}\n\n.card-img-profile {\n  max-width: 100%;\n  border-radius: 50%;\n  margin-top: -95px;\n  margin-bottom: 35px;\n}\n\n.card-title {\n  margin-bottom: 50px;\n}\n\nsmall {\n  display: block;\n  font-size: .6em;\n  margin-top: .2em;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 593 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(592);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(577)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!./ProfileImage.css", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!./ProfileImage.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

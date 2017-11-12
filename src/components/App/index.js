@@ -83,20 +83,31 @@ export default class App extends Component {
       console.log('data', data)
      data.map((item, index) => {
         const { width, height, url } = item.images.thumbnail
-        pics.push(<ProfileImage thumbnailURL={url} width={width} height={height} />)
+        const { count } = item.comments
+        const { text } = item.caption
+        pics.push(
+          <ProfileImage 
+            thumbnailURL={url} 
+            width="120" 
+            height="120" 
+            count={count} 
+            likes={item.likes.count}
+            caption={text} 
+          />
+        )
       })
     }
-    return pics
+    return <div className="row">{pics}</div>
   }
 
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
     this.setState({ loading: true })
-    window.location.assign(TEST_API_URL+SCOPES)
+    window.location.assign(API_URL+SCOPES)
   }
 
   showHideAuthButton = () => {
-    const { authorized, data: { full_name } } = this.state
+    const { authorized, loading, data: { full_name } } = this.state
 
     if(authorized){
       return (
@@ -115,32 +126,38 @@ export default class App extends Component {
         onClick={this.handleInstagramAPIRequest}
       >
       {
-        this.state.loading ? 'Navigating to Instagram...' :'Instagram  AUTH' 
+        loading ? 'Navigating to Instagram...' :'Instagram  AUTH' 
       } 
       </button>
     )
   }
 
 	render() {
-    const { value } = this.state
+    const { value, profileImages: { data } } = this.state
     console.log('this.state',this.state)
     console.log('this.props',this.props)
 		return (
-			<div className="text-center">
-        <h3>{ value }</h3>
-        <div>
-          {this.showHideAuthButton()}
+			<div>
+        <div className="row">
+          <div className="col-md-12 text-center">
+            <h3>{ value }</h3>
+            <div>
+              {this.showHideAuthButton()}
+            </div>
+            <div>
+              {this.loadProfile()}
+            </div>
+          </div>
         </div>
-        <div>
-          {this.loadProfile()}
+        <div className="row">
+          <div className="text-center">           
+            { data ? <h4>Profile Images</h4> : '' } 
+            <div>
+              {this.loadProfileImages()}
+            </div>
+          </div>
         </div>
-        <div className="">
-         {
-          this.state.profileImages.data ? <h4>Profile Images</h4>: ''
-         }
-          {this.loadProfileImages()}
-        </div>
-			</div>
+      </div>
 		);
 	}
 }
