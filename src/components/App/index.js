@@ -188,7 +188,7 @@ export default class App extends Component {
     const loadingText = sessionStorage.length > 0 && loading ? 'Reloading...' : 'Navigating to Instagram...'
     return (
       <button 
-        className="btn btn-outline-primary"
+        className="btn light-blue"
         onClick={this.handleInstagramAPIRequest}
       >
       {
