@@ -37809,7 +37809,8 @@ var App = function (_Component) {
       var _this$state = _this.state,
           authorized = _this$state.authorized,
           loading = _this$state.loading,
-          full_name = _this$state.data.full_name;
+          full_name = _this$state.data.full_name,
+          showAjaxLoader = _this$state.showAjaxLoader;
 
       if (authorized) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -37822,13 +37823,15 @@ var App = function (_Component) {
           )
         );
       }
+      var reloadText = sessionStorage.length > 0 && !loading ? 'Reload Profile' : 'Instagram AUTH';
+      var loadingText = sessionStorage.length > 0 && loading ? 'Reloading...' : 'Navigating to Instagram...';
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'button',
         {
           className: 'btn btn-outline-primary',
           onClick: _this.handleInstagramAPIRequest
         },
-        loading ? 'Navigating to Instagram...' : 'Instagram  AUTH'
+        loading ? loadingText : reloadText
       );
     };
 
@@ -37854,20 +37857,41 @@ var App = function (_Component) {
           data = _state.data;
 
       if (!prevState.authorized && authorized) {
+        var checkDataCacheBeforeAPICall = sessionStorage.getItem(access_token + 'data');
+        if (checkDataCacheBeforeAPICall) {
+          this.setState({
+            data: JSON.parse(checkDataCacheBeforeAPICall)
+          });
+          console.log('hit data session cache');
+          return;
+        }
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* API_CALL_FOR_USER_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
             console.log('error', error);
           } else {
             _this2.setState({ data: data.data });
+            sessionStorage.setItem(access_token + 'data', JSON.stringify(data.data));
+            console.log('made data api call');
           }
         });
       }
       if (!prevState.data.id && data.id) {
+        var checkProfileCacheBeforeAPICall = sessionStorage.getItem(access_token + 'profile');
+        if (checkProfileCacheBeforeAPICall) {
+          this.setState({
+            profileImages: JSON.parse(checkProfileCacheBeforeAPICall),
+            showAjaxLoader: true
+          });
+          console.log('hit profile session cache');
+          return;
+        }
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["d" /* API_CALL_FOR_USER_COMPLETE_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
             console.log('error', error);
           } else {
-            _this2.setState({ profileImages: data });
+            _this2.setState({ profileImages: data, showAjaxLoader: true });
+            sessionStorage.setItem(access_token + 'profile', JSON.stringify(data));
+            console.log('made profile api call');
           }
         });
       }
@@ -37893,6 +37917,7 @@ var App = function (_Component) {
           data = _state2.profileImages.data;
 
       console.log('this.state', this.state);
+      console.log('sessionStorage', sessionStorage);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,

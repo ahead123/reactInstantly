@@ -28,20 +28,41 @@ export default class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { access_token, authorized, data } = this.state
     if(!prevState.authorized && authorized){
+      const checkDataCacheBeforeAPICall = sessionStorage.getItem(access_token+'data');
+      if (checkDataCacheBeforeAPICall) {
+        this.setState({ 
+          data: JSON.parse(checkDataCacheBeforeAPICall)
+        });
+        console.log('hit data session cache')
+        return
+      }
       jsonp(API_CALL_FOR_USER_PROFILE + access_token, null, (error, data) => {
         if(error){
           console.log('error', error)
         }else{
           this.setState({ data: data.data })
+          sessionStorage.setItem(access_token+'data', JSON.stringify(data.data))
+           console.log('made data api call')
         }
       })
     }
     if(!prevState.data.id && data.id){
+      const checkProfileCacheBeforeAPICall = sessionStorage.getItem(access_token+'profile');
+      if (checkProfileCacheBeforeAPICall) {
+        this.setState({ 
+          profileImages: JSON.parse(checkProfileCacheBeforeAPICall),
+          showAjaxLoader: true
+        });
+        console.log('hit profile session cache')
+        return
+      }
       jsonp(API_CALL_FOR_USER_COMPLETE_PROFILE + access_token, null, (error, data) => {
         if(error){
           console.log('error', error)
         }else{
-          this.setState({ profileImages: data })
+          this.setState({ profileImages: data, showAjaxLoader: true })
+          sessionStorage.setItem(access_token+'profile', JSON.stringify(data))
+          console.log('made profile api call')
         }
       })
     }
@@ -114,7 +135,7 @@ export default class App extends Component {
   }
 
   showHideAuthButton = () => {
-    const { authorized, loading, data: { full_name } } = this.state
+    const { authorized, loading, data: { full_name }, showAjaxLoader } = this.state
     if(authorized){
       return (
         <div>
@@ -126,21 +147,24 @@ export default class App extends Component {
         </div>
       )
     }
+    const reloadText = sessionStorage.length > 0 && !loading ? 'Reload Profile' : 'Instagram AUTH'
+    const loadingText = sessionStorage.length > 0 && loading ? 'Reloading...' : 'Navigating to Instagram...'
     return (
       <button 
         className="btn btn-outline-primary"
         onClick={this.handleInstagramAPIRequest}
       >
       {
-        loading ? 'Navigating to Instagram...' :'Instagram  AUTH' 
-      } 
+        loading ? loadingText : reloadText 
+      }
       </button>
-    )
+    )  
   }
 
 	render() {
     const { value, profileImages: { data } } = this.state
     console.log('this.state',this.state)
+    console.log('sessionStorage', sessionStorage)
 		return (
 			<div>
         <div className="row">
