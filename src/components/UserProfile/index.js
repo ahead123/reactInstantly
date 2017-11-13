@@ -1,9 +1,10 @@
 import React from 'react'
 import './UserProfile.css'
 
-const UserProfile = ({ userName, text, profile_picture, followers, following, posts }) => {
+const UserProfile = ({ link, userName, text, profile_picture, followers, following, posts }) => {
 	return (
 		<div className="card card-profile text-center">
+		<a href={link} target="_blank" style={{textDecoration: 'none', color: '#000'}}>
 			<img 
 				className="card-img-top" 
 				src="https://picsum.photos/340/160/?random"
@@ -21,6 +22,7 @@ const UserProfile = ({ userName, text, profile_picture, followers, following, po
   				<small><span className="badge badge-pill badge-success">Posts { posts }</span></small>
 				</h4>
 			</div>
+			</a>
 		</div>
 	)
 }

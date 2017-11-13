@@ -37443,7 +37443,8 @@ function toComment(sourceMap) {
 
 
 var UserProfile = function UserProfile(_ref) {
-	var userName = _ref.userName,
+	var link = _ref.link,
+	    userName = _ref.userName,
 	    text = _ref.text,
 	    profile_picture = _ref.profile_picture,
 	    followers = _ref.followers,
@@ -37453,58 +37454,62 @@ var UserProfile = function UserProfile(_ref) {
 	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 		'div',
 		{ className: 'card card-profile text-center' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
-			className: 'card-img-top',
-			src: 'https://picsum.photos/340/160/?random'
-		}),
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			{ className: 'card-block' },
+			'a',
+			{ href: link, target: '_blank', style: { textDecoration: 'none', color: '#000' } },
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
-				className: 'card-img-profile',
-				src: profile_picture
+				className: 'card-img-top',
+				src: 'https://picsum.photos/340/160/?random'
 			}),
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'h4',
-				{ className: 'card-title' },
-				text,
+				'div',
+				{ className: 'card-block' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+					className: 'card-img-profile',
+					src: profile_picture
+				}),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'small',
-					null,
+					'h4',
+					{ className: 'card-title' },
+					text,
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'span',
-						{ className: 'badge badge-pill badge-warning' },
-						userName
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'small',
-					null,
+						'small',
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'badge badge-pill badge-warning' },
+							userName
+						)
+					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'span',
-						{ className: 'badge badge-pill badge-primary' },
-						'Followers ',
-						followers
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'small',
-					null,
+						'small',
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'badge badge-pill badge-primary' },
+							'Followers ',
+							followers
+						)
+					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'span',
-						{ className: 'badge badge-pill badge-info' },
-						'Following ',
-						following
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'small',
-					null,
+						'small',
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'badge badge-pill badge-info' },
+							'Following ',
+							following
+						)
+					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'span',
-						{ className: 'badge badge-pill badge-success' },
-						'Posts ',
-						posts
+						'small',
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'badge badge-pill badge-success' },
+							'Posts ',
+							posts
+						)
 					)
 				)
 			)
@@ -37746,13 +37751,15 @@ var App = function (_Component) {
             counts = _this$state$data.counts,
             username = _this$state$data.username;
 
+        var link = 'https://www.instagram.com/' + username;
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__UserProfile__["a" /* default */], {
           userName: username,
           text: full_name,
           profile_picture: profile_picture,
           followers: counts.followed_by,
           following: counts.follows,
-          posts: counts.media
+          posts: counts.media,
+          link: link
         });
       }
     };
@@ -37769,7 +37776,8 @@ var App = function (_Component) {
               height = _item$images$thumbnai.height,
               url = _item$images$thumbnai.url,
               count = item.comments.count,
-              likes = item.likes;
+              likes = item.likes,
+              link = item.link;
 
 
           pics.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ProfileImage__["a" /* default */], {
@@ -37779,7 +37787,8 @@ var App = function (_Component) {
             height: height,
             count: count,
             likes: likes.count,
-            caption: text
+            caption: text,
+            link: link
           }));
         });
       }
@@ -37956,7 +37965,8 @@ var ProfileImage = function ProfileImage(_ref) {
       height = _ref.height,
       count = _ref.count,
       likes = _ref.likes,
-      caption = _ref.caption;
+      caption = _ref.caption,
+      link = _ref.link;
 
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
@@ -37965,50 +37975,54 @@ var ProfileImage = function ProfileImage(_ref) {
       'div',
       { className: 'card card-profile' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'card-block' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
-          className: 'card-img-profile',
-          src: thumbnailURL,
-          width: width,
-          height: height
-        }),
+        'a',
+        { href: link, target: '_blank', style: { textDecoration: 'none', color: 'black' } },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'h4',
-          { className: 'card-title' },
+          'div',
+          { className: 'card-block' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+            className: 'card-img-profile',
+            src: thumbnailURL,
+            width: width,
+            height: height
+          }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'small',
-            null,
+            'h4',
+            { className: 'card-title' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'badge badge-pill badge-primary' },
-              'Comments ',
-              count
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'small',
-            null,
+              'small',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                { className: 'badge badge-pill badge-primary' },
+                'Comments ',
+                count
+              )
+            ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'badge badge-pill badge-info' },
-              'Likes ',
-              likes
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'small',
-            null,
+              'small',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                { className: 'badge badge-pill badge-info' },
+                'Likes ',
+                likes
+              )
+            ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'badge badge-pill badge-success' },
-              'Post'
+              'small',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                { className: 'badge badge-pill badge-success' },
+                'Post'
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'small',
+              null,
+              caption
             )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'small',
-            null,
-            caption
           )
         )
       )
@@ -38028,7 +38042,7 @@ exports = module.exports = __webpack_require__(579)(undefined);
 
 
 // module
-exports.push([module.i, ".card-profile {\n  max-width: 340px;\n  margin: 50px auto;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 1em 1em 2em rgba(0,0,0,.2);\n}\n\n.card-img-top {\n  border-radius: 0;\n}\n\n.card-img-profile {\n  max-width: 100%;\n  border-radius: 50%;\n  margin-top: -95px;\n  margin-bottom: 35px;\n}\n\n.card-title {\n  margin-bottom: 50px;\n  padding: 5px;\n}\n\nsmall {\n  display: block;\n  font-size: .6em;\n  margin-top: .2em;\n}", ""]);
+exports.push([module.i, ".card-profile {\n  max-width: 340px;\n  margin: 50px auto;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 1em 1em 2em rgba(0,0,0,.2);\n}\n\n.card-img-top {\n  border-radius: 0;\n}\n\n.card-img-profile {\n  max-width: 100%;\n  border-radius: 50%;\n  margin-top: -95px;\n  margin-bottom: 35px;\n}\n\n.card-title {\n  margin-bottom: 50px;\n  padding: 5px;\n}\n\nsmall {\n  display: block;\n  font-size: .6em;\n  margin-top: .2em;\n}\n\ndiv.card-profile a:hover {\n  box-shadow: 2px 3px 2px #7f8c8d;\n}", ""]);
 
 // exports
 

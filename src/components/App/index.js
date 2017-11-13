@@ -61,6 +61,7 @@ export default class App extends Component {
   loadProfile = () => {
     if(this.state.data.id){
       const { data: { full_name, profile_picture, counts, username } } = this.state
+      const link = `https://www.instagram.com/${username}`
       return (
         <UserProfile
           userName={username} 
@@ -69,6 +70,7 @@ export default class App extends Component {
           followers={counts.followed_by}
           following={counts.follows}
           posts={counts.media}
+          link={link}
         />
       )
     }   
@@ -84,7 +86,8 @@ export default class App extends Component {
           caption: { text },  
           images: { thumbnail: { width, height, url } },
           comments: { count },
-          likes 
+          likes,
+          link 
         } = item
 
         pics.push(
@@ -95,7 +98,8 @@ export default class App extends Component {
             height={height} 
             count={count} 
             likes={likes.count}
-            caption={text} 
+            caption={text}
+            link={link} 
           />
         )
       })
