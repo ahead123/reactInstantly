@@ -17370,9 +17370,10 @@ var styles = {
 	navStyles: {
 		paddingTop: 300
 	}
+};
 
-	// Render App to DOM
-};__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+// Render App to DOM
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 	__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* BrowserRouter */],
 	null,
 	__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Routes, null)
@@ -37801,7 +37802,13 @@ var App = function (_Component) {
 
     _this.handleInstagramAPIRequest = function (event) {
       event.preventDefault();
+
       _this.setState({ loading: true });
+
+      {/* 
+         Redirects user to Instagram to get access_token and request scope approval.
+         If the user has previously approved the app and has an existing token, no redirect will happen
+        */}
       window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
     };
 
@@ -37823,6 +37830,10 @@ var App = function (_Component) {
           )
         );
       }
+
+      {/* 
+         switching button text based on existing session or loading state 
+        */}
       var reloadText = sessionStorage.length > 0 && !loading ? 'Reload Profile' : 'Instagram AUTH';
       var loadingText = sessionStorage.length > 0 && loading ? 'Reloading...' : 'Navigating to Instagram...';
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -37856,7 +37867,16 @@ var App = function (_Component) {
           authorized = _state.authorized,
           data = _state.data;
 
+
+      {/* checks if the user is authorized */}
       if (!prevState.authorized && authorized) {
+
+        {/* 
+           if the user is authorized and already has a session, 
+           the session data is cached is state and no api call is made.
+           data will be shown to the user from the cache instead.
+           using the browsers native storage: sessionStorage
+          */}
         var checkDataCacheBeforeAPICall = sessionStorage.getItem(access_token + 'data');
         if (checkDataCacheBeforeAPICall) {
           this.setState({
@@ -37865,6 +37885,12 @@ var App = function (_Component) {
           console.log('hit data session cache');
           return;
         }
+
+        {/* 
+           API call to Instagram if there is no existing session for the user.
+           The resulting data from the API call will be stored in sessionStorage
+           so next time the user requests their profile, it serves from cache. 
+          */}
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["c" /* API_CALL_FOR_USER_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
             console.log('error', error);
@@ -37875,8 +37901,16 @@ var App = function (_Component) {
           }
         });
       }
+
+      {/* 
+         Checks to see if the users profile photos are already loaded 
+        */}
       if (!prevState.data.id && data.id) {
         var checkProfileCacheBeforeAPICall = sessionStorage.getItem(access_token + 'profile');
+        {/* 
+          Checks cache for existing photo data from the users session instead
+          of making the API call.
+          */}
         if (checkProfileCacheBeforeAPICall) {
           this.setState({
             profileImages: JSON.parse(checkProfileCacheBeforeAPICall),
@@ -37885,6 +37919,8 @@ var App = function (_Component) {
           console.log('hit profile session cache');
           return;
         }
+
+        {/* API call to Instagram for the users images if no session currently exists */}
         __WEBPACK_IMPORTED_MODULE_2_jsonp___default()(__WEBPACK_IMPORTED_MODULE_4__constants__["d" /* API_CALL_FOR_USER_COMPLETE_PROFILE */] + access_token, null, function (error, data) {
           if (error) {
             console.log('error', error);
@@ -37902,6 +37938,7 @@ var App = function (_Component) {
       var access_token = void 0,
           authorized = false;
 
+      {/* grab and store the users access_token from the url after the Instagram redirect */}
       if (window.location.href.indexOf('access_token') > -1) {
         access_token = window.location.href.split('access_token=')[1].trim();
         authorized = true;
@@ -38001,7 +38038,7 @@ var ProfileImage = function ProfileImage(_ref) {
       { className: 'card card-profile' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'a',
-        { href: link, target: '_blank', style: { textDecoration: 'none', color: 'black' } },
+        { href: link, target: '_blank', style: { textDecoration: 'none', color: ' #000' } },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'card-block' },

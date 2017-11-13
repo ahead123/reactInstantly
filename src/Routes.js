@@ -11,11 +11,11 @@ import { navData } from './components/NavigationLink/NavLinkData';
 class Routes extends Component {
 
 	buildNav = () => {
-		let navLinks = [<Link className="navbar-brand" to="/">instaReact</Link>]
+		let navLinks = [<Link className="navbar-brand" to="/">instaReact</Link>];
 		navData.forEach((item, index) => {
-			 navLinks.push(<NavigationLink path={item.path} text={item.text} key={index} />)
+			 navLinks.push(<NavigationLink path={item.path} text={item.text} key={index} />);
 		})
-		return <ul className="navbar-nav mr-auto">{ navLinks }</ul>		
+		return <ul className="navbar-nav mr-auto">{ navLinks }</ul>;		
 	}
 
 	render(){
@@ -40,7 +40,7 @@ const styles = {
 	navStyles: {
 		paddingTop: 300
 	}
-}	
+};	
 
 // Render App to DOM
 render((

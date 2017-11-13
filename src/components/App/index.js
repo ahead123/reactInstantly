@@ -9,8 +9,8 @@ import {
   API_CALL_FOR_USER_COMPLETE_PROFILE,
   SCOPES
 } from '../../constants';
-import UserProfile from '../UserProfile'
-import ProfileImage from '../ProfileImage'
+import UserProfile from '../UserProfile';
+import ProfileImage from '../ProfileImage';
 
 export default class App extends Component {
   constructor(props, context) {
@@ -27,7 +27,16 @@ export default class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { access_token, authorized, data } = this.state
+
+    {/* checks if the user is authorized */}
     if(!prevState.authorized && authorized){
+
+    {/* 
+      if the user is authorized and already has a session, 
+      the session data is cached is state and no api call is made.
+      data will be shown to the user from the cache instead.
+      using the browsers native storage: sessionStorage
+    */}
       const checkDataCacheBeforeAPICall = sessionStorage.getItem(access_token+'data');
       if (checkDataCacheBeforeAPICall) {
         this.setState({ 
@@ -36,6 +45,12 @@ export default class App extends Component {
         console.log('hit data session cache')
         return
       }
+
+      {/* 
+        API call to Instagram if there is no existing session for the user.
+        The resulting data from the API call will be stored in sessionStorage
+        so next time the user requests their profile, it serves from cache. 
+      */}
       jsonp(API_CALL_FOR_USER_PROFILE + access_token, null, (error, data) => {
         if(error){
           console.log('error', error)
@@ -46,8 +61,16 @@ export default class App extends Component {
         }
       })
     }
+
+    {/* 
+      Checks to see if the users profile photos are already loaded 
+    */}
     if(!prevState.data.id && data.id){
       const checkProfileCacheBeforeAPICall = sessionStorage.getItem(access_token+'profile');
+      {/* 
+       Checks cache for existing photo data from the users session instead
+       of making the API call.
+      */}
       if (checkProfileCacheBeforeAPICall) {
         this.setState({ 
           profileImages: JSON.parse(checkProfileCacheBeforeAPICall),
@@ -56,6 +79,8 @@ export default class App extends Component {
         console.log('hit profile session cache')
         return
       }
+
+      {/* API call to Instagram for the users images if no session currently exists */}
       jsonp(API_CALL_FOR_USER_COMPLETE_PROFILE + access_token, null, (error, data) => {
         if(error){
           console.log('error', error)
@@ -64,13 +89,15 @@ export default class App extends Component {
           sessionStorage.setItem(access_token+'profile', JSON.stringify(data))
           console.log('made profile api call')
         }
-      })
+      })     
     }
+
   }
 
   componentDidMount() {
     let access_token, authorized=false;
 
+    {/* grab and store the users access_token from the url after the Instagram redirect */}
     if(window.location.href.indexOf('access_token')>-1) {
        access_token = window.location.href.split('access_token=')[1].trim()
        authorized = true
@@ -130,7 +157,13 @@ export default class App extends Component {
 
   handleInstagramAPIRequest = (event) => {
     event.preventDefault()
+
     this.setState({ loading: true })
+
+    {/* 
+      Redirects user to Instagram to get access_token and request scope approval.
+      If the user has previously approved the app and has an existing token, no redirect will happen
+    */}
     window.location.assign(API_URL+SCOPES)
   }
 
@@ -147,6 +180,10 @@ export default class App extends Component {
         </div>
       )
     }
+
+    {/* 
+      switching button text based on existing session or loading state 
+    */}
     const reloadText = sessionStorage.length > 0 && !loading ? 'Reload Profile' : 'Instagram AUTH'
     const loadingText = sessionStorage.length > 0 && loading ? 'Reloading...' : 'Navigating to Instagram...'
     return (

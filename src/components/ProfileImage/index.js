@@ -5,7 +5,7 @@ const ProfileImage = ({ thumbnailURL, width, height, count, likes, caption, link
 	return (   
   	<div className="col-lg-3" style={{ marginTop: 80}}>
   		<div className="card card-profile">
-  		<a href={link} target="_blank" style={{textDecoration: 'none', color: 'black'}}>
+  		<a href={link} target="_blank" style={{textDecoration: 'none', color: ' #000'}}>
   			<div className="card-block">
 	  				<img 
 	  					className="card-img-profile" 
