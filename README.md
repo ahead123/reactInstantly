@@ -34,6 +34,12 @@ heroku open
 * [Express](https://expressjs.com/) - Node server framework
 * [Bootstrap 4](https://v4-alpha.getbootstrap.com/) - For styling
 
+## Screenshots
+
+![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/login.png)
+
+
+![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/layout.png)
 
 
 ## License
