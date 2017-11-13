@@ -18241,11 +18241,17 @@ var Routes = function (_Component) {
 				null,
 				__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 					'nav',
-					{ className: 'navbar navbar-expand-lg navbar-dark light-blue' },
+					{ className: 'navbar navbar-expand-lg fixed-top navbar-dark light-blue' },
 					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 						'button',
-						{ className: 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarSupportedContent', 'aria-controls': 'navbarSupportedContent',
-							'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
+						{
+							className: 'navbar-toggler',
+							type: 'button',
+							'data-toggle': 'collapse',
+							'data-target': '#navbarSupportedContent',
+							'aria-controls': 'navbarSupportedContent',
+							'aria-expanded': 'false',
+							'aria-label': 'Toggle navigation' },
 						__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('span', { className: 'navbar-toggler-icon' })
 					),
 					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -18270,7 +18276,7 @@ var Routes = function (_Component) {
 
 var styles = {
 	navStyles: {
-		paddingTop: 300
+		paddingTop: 180
 	}
 };
 
