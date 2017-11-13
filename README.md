@@ -36,10 +36,13 @@ heroku open
 
 ## Screenshots
 
-![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/login.png)
+![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/login1.png)
 
 
-![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/layout.png)
+![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/layout1.png)
+
+
+![alt text](https://raw.githubusercontent.com/ahead123/reactInstantly/screenshots/src/mobile.png)
 
 
 ## License
