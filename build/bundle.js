@@ -16921,7 +16921,7 @@ var App = function (_Component) {
          Redirects user to Instagram to get access_token and request scope approval.
          If the user has previously approved the app and has an existing token, no redirect will happen
         */}
-      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
+      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* TEST_API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
     };
 
     _this.showHideAuthButton = function () {
@@ -17084,7 +17084,8 @@ var App = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               null,
-              this.showHideAuthButton()
+              this.showHideAuthButton(),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null)
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
@@ -18217,11 +18218,7 @@ var Routes = function (_Component) {
 		}
 
 		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Routes.__proto__ || Object.getPrototypeOf(Routes)).call.apply(_ref, [this].concat(args))), _this), _this.buildNav = function () {
-			var navLinks = [__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-				__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* Link */],
-				{ className: 'navbar-brand', to: '/' },
-				'instaReact'
-			)];
+			var navLinks = [];
 			__WEBPACK_IMPORTED_MODULE_8__components_NavigationLink_NavLinkData__["a" /* navData */].forEach(function (item, index) {
 				navLinks.push(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__components_NavigationLink__["a" /* default */], { path: item.path, text: item.text, key: index }));
 			});
@@ -18243,21 +18240,30 @@ var Routes = function (_Component) {
 					'nav',
 					{ className: 'navbar navbar-expand-lg fixed-top navbar-dark light-blue' },
 					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-						'button',
-						{
-							className: 'navbar-toggler',
-							type: 'button',
-							'data-toggle': 'collapse',
-							'data-target': '#navbarSupportedContent',
-							'aria-controls': 'navbarSupportedContent',
-							'aria-expanded': 'false',
-							'aria-label': 'Toggle navigation' },
-						__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('span', { className: 'navbar-toggler-icon' })
-					),
-					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 						'div',
-						{ className: 'collapse navbar-collapse', id: 'navbarSupportedContent' },
-						this.buildNav()
+						{ className: 'container' },
+						__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+							__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* Link */],
+							{ className: 'navbar-brand', to: '/' },
+							'instaReact'
+						),
+						__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+							'button',
+							{
+								className: 'navbar-toggler',
+								type: 'button',
+								'data-toggle': 'collapse',
+								'data-target': '#navbarSupportedContent',
+								'aria-controls': 'navbarSupportedContent',
+								'aria-expanded': 'false',
+								'aria-label': 'Toggle navigation' },
+							__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('span', { className: 'navbar-toggler-icon' })
+						),
+						__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+							'div',
+							{ className: 'collapse navbar-collapse', id: 'navbarSupportedContent' },
+							this.buildNav()
+						)
 					)
 				),
 				__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -18300,74 +18306,74 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_dom__["render"])(__WEBPA
 
 
 var ProfileImage = function ProfileImage(_ref) {
-  var thumbnailURL = _ref.thumbnailURL,
-      width = _ref.width,
-      height = _ref.height,
-      count = _ref.count,
-      likes = _ref.likes,
-      caption = _ref.caption,
-      link = _ref.link;
+	var thumbnailURL = _ref.thumbnailURL,
+	    width = _ref.width,
+	    height = _ref.height,
+	    count = _ref.count,
+	    likes = _ref.likes,
+	    caption = _ref.caption,
+	    link = _ref.link;
 
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    { className: 'col-lg-3', style: { marginTop: 80 } },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
-      { className: 'card card-profile' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'a',
-        { href: link, target: '_blank', style: { textDecoration: 'none', color: ' #000' } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'card-block' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
-            className: 'card-img-profile',
-            src: thumbnailURL,
-            width: width,
-            height: height
-          }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h4',
-            { className: 'card-title' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'small',
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                { className: 'badge badge-pill badge-primary' },
-                'Comments ',
-                count
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'small',
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                { className: 'badge badge-pill badge-info' },
-                'Likes ',
-                likes
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'small',
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                { className: 'badge badge-pill badge-success' },
-                'Post'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'small',
-              null,
-              caption
-            )
-          )
-        )
-      )
-    )
-  );
+	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+		'div',
+		{ className: 'col-lg-3', style: { marginTop: 80 } },
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+			'div',
+			{ className: 'card card-profile' },
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'a',
+				{ href: link, target: '_blank', style: { textDecoration: 'none', color: ' #000' } },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'card-block' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+						className: 'card-img-profile',
+						src: thumbnailURL,
+						width: width,
+						height: height
+					}),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h4',
+						{ className: 'card-title' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'small',
+							null,
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'span',
+								{ className: 'badge badge-pill badge-primary' },
+								'Comments ',
+								count
+							)
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'small',
+							null,
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'span',
+								{ className: 'badge badge-pill badge-info' },
+								'Likes ',
+								likes
+							)
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'small',
+							null,
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'span',
+								{ className: 'badge badge-pill badge-success' },
+								'Post'
+							)
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'small',
+							null,
+							caption
+						)
+					)
+				)
+			)
+		)
+	);
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (ProfileImage);
@@ -18466,14 +18472,14 @@ var UserProfile = function UserProfile(_ref) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
-/* unused harmony export TEST_API_URL */
+/* unused harmony export API_URL */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TEST_API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return API_CALL_FOR_USER_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return API_CALL_FOR_USER_COMPLETE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
 var CLIENT_ID = 'b02dd812498b4182b234086da2731631';
 var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token';
-var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=http://localhost:3000/&response_type=token';
+var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=http://localhost:4000/&response_type=token';
 var API_CALL_FOR_USER_PROFILE = 'https://api.instagram.com/v1/users/self/?access_token=';
 var API_CALL_FOR_USER_COMPLETE_PROFILE = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=';
 var SCOPES = '&scope=public_content+follower_list+comments+relationships+likes';

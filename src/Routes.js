@@ -11,7 +11,7 @@ import { navData } from './components/NavigationLink/NavLinkData';
 class Routes extends Component {
 
 	buildNav = () => {
-		let navLinks = [<Link className="navbar-brand" to="/">instaReact</Link>];
+		let navLinks = [];
 		navData.forEach((item, index) => {
 			 navLinks.push(<NavigationLink path={item.path} text={item.text} key={index} />);
 		})
@@ -22,7 +22,8 @@ class Routes extends Component {
 		return(
 			<div>
 				<nav className="navbar navbar-expand-lg fixed-top navbar-dark light-blue">
-
+					<div className="container">
+					<Link className="navbar-brand" to="/">instaReact</Link>
 			    <button 
 			    	className="navbar-toggler" 
 			    	type="button" 
@@ -37,7 +38,7 @@ class Routes extends Component {
 			    <div className="collapse navbar-collapse" id="navbarSupportedContent">				
 						{this.buildNav()}
 					</div>
-
+					</div>
 				</nav>
 
 		    <div className="container col-md-12" style={styles.navStyles}>
