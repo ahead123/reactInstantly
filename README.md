@@ -24,7 +24,7 @@ heroku open
 
 ## View a LIVE example of this app
 
-[instaReact](https://sleepy-brushlands-39585.herokuapp.com/)
+[instaReact](https://reactinstantly.herokuapp.com/)
 
 ## Built With
 

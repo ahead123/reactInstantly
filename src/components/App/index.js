@@ -164,7 +164,7 @@ export default class App extends Component {
       Redirects user to Instagram to get access_token and request scope approval.
       If the user has previously approved the app and has an existing token, no redirect will happen
     */}
-    window.location.assign(TEST_API_URL+SCOPES)
+    window.location.assign(API_URL+SCOPES)
   }
 
   showHideAuthButton = () => {
