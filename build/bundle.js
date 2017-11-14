@@ -18479,7 +18479,7 @@ var UserProfile = function UserProfile(_ref) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
 var CLIENT_ID = 'b02dd812498b4182b234086da2731631';
 var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=https://reactinstantly.herokuapp.com/&response_type=token';
-var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=http://localhost:4000/&response_type=token';
+var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=http://localhost:3000/&response_type=token';
 var API_CALL_FOR_USER_PROFILE = 'https://api.instagram.com/v1/users/self/?access_token=';
 var API_CALL_FOR_USER_COMPLETE_PROFILE = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=';
 var SCOPES = '&scope=public_content+follower_list+comments+relationships+likes';
