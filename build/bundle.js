@@ -16921,7 +16921,7 @@ var App = function (_Component) {
          Redirects user to Instagram to get access_token and request scope approval.
          If the user has previously approved the app and has an existing token, no redirect will happen
         */}
-      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* TEST_API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
+      window.location.assign(__WEBPACK_IMPORTED_MODULE_4__constants__["a" /* API_URL */] + __WEBPACK_IMPORTED_MODULE_4__constants__["b" /* SCOPES */]);
     };
 
     _this.showHideAuthButton = function () {
@@ -18472,13 +18472,13 @@ var UserProfile = function UserProfile(_ref) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export API_URL */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TEST_API_URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return API_URL; });
+/* unused harmony export TEST_API_URL */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return API_CALL_FOR_USER_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return API_CALL_FOR_USER_COMPLETE_PROFILE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SCOPES; });
 var CLIENT_ID = 'b02dd812498b4182b234086da2731631';
-var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=https://sleepy-brushlands-39585.herokuapp.com/&response_type=token';
+var API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=https://reactinstantly.herokuapp.com/&response_type=token';
 var TEST_API_URL = 'https://api.instagram.com/oauth/authorize/?client_id=' + CLIENT_ID + '&redirect_uri=http://localhost:4000/&response_type=token';
 var API_CALL_FOR_USER_PROFILE = 'https://api.instagram.com/v1/users/self/?access_token=';
 var API_CALL_FOR_USER_COMPLETE_PROFILE = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=';
